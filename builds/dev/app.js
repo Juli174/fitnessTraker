@@ -2,7 +2,8 @@
 	'use strict';
 
 	angular.module('Fitness', [
-		'ui.router',
+		// 'ui.router',
+		'ngRoute',
 		'Fitness.Fire',
 		'Fitness.Exercises'
 		])
@@ -10,10 +11,20 @@
 	.config(Config)
 	.controller('MainCtrl', MainController)
 
+	// //@ngInject
+	// function Config($urlRouterProvider, $logProvider){
+	// 	$logProvider.debugEnabled(true);
+	// 	$urlRouterProvider.otherwise('/');
+	// }
 	//@ngInject
-	function Config($urlRouterProvider, $logProvider){
-		$logProvider.debugEnabled(true);
-		$urlRouterProvider.otherwise('/');
+	function Config($routeProvider){
+		$routeProvider
+		.when('/exercises', {
+			templateUrl: 'exercises/index.html',
+			controller: 'ExercisesCtrl',
+			controllerAs: 'esc'
+		})
+		.otherwise({redirectTo: '/'})
 	}
 
 	//@ngInject
@@ -25,11 +36,11 @@
 	'use strict';
 
 	angular.module('Fitness.Exercises', [
-		'ui.router',
+		// 'ui.router',
 		'Fitness.Exercises.Repository'
 		])
 	.controller('ExercisesCtrl', ExercisesController)
-	.config(ExercisesConfig)
+	//.config(ExercisesConfig)
 
 	//@ngInject
 	function ExercisesController($q, ExercisesRepository){
@@ -39,18 +50,17 @@
 		});
 	}
 
-	//@ngInject
-	function ExercisesConfig($stateProvider){
-		$stateProvider
-		.state('Exercises', {
-			url: '/exercises',
-			templateUrl: 'app/exercises/index.html',
-			controller: 'ExercisesCtrl',
-			controllerAs: 'esc'
-		});
-	}
+	// //@ngInject
+	// function ExercisesConfig($stateProvider){
+	// 	$stateProvider
+	// 	.state('Exercises', {
+	// 		url: '/exercises',
+	// 		templateUrl: 'app/exercises/index.html',
+	// 		controller: 'ExercisesCtrl',
+	// 		controllerAs: 'esc'
+	// 	});
+	// }
 })();
-
 ;(function(){
 	'use strict';
 

@@ -2,7 +2,8 @@
 	'use strict';
 
 	angular.module('Fitness', [
-		'ui.router',
+		// 'ui.router',
+		'ngRoute',
 		'Fitness.Fire',
 		'Fitness.Exercises'
 		])
@@ -10,10 +11,20 @@
 	.config(Config)
 	.controller('MainCtrl', MainController)
 
+	// //@ngInject
+	// function Config($urlRouterProvider, $logProvider){
+	// 	$logProvider.debugEnabled(true);
+	// 	$urlRouterProvider.otherwise('/');
+	// }
 	//@ngInject
-	function Config($urlRouterProvider, $logProvider){
-		$logProvider.debugEnabled(true);
-		$urlRouterProvider.otherwise('/');
+	function Config($routeProvider){
+		$routeProvider
+		.when('/exercises', {
+			templateUrl: 'exercises/index.html',
+			controller: 'ExercisesCtrl',
+			controllerAs: 'esc'
+		})
+		.otherwise({redirectTo: '/'})
 	}
 
 	//@ngInject

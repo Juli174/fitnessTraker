@@ -6,9 +6,10 @@
   	<link rel="stylesheet" href="app.css"/>
  </head>
  <body>
- 	<ng-include src="'app/exercises/index.html'"></ng-include>
- 	<div>{{1+3}}</div>
- 	<div ng-controller="MainCtrl">{{hello}}</div>
+ 	<ng-include src="'app/status/navbar.html'"></ng-include>
+ 	<div class="container view-container" ng-view>
+ 		<p>{{hello}}</p>
+ 	</div>
  	<script type="text/javascript" src="libs.js"></script>
  	<script type="text/javascript" src="app.js"></script>
  </body>

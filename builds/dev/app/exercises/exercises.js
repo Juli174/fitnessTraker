@@ -2,11 +2,11 @@
 	'use strict';
 
 	angular.module('Fitness.Exercises', [
-		'ui.router',
+		// 'ui.router',
 		'Fitness.Exercises.Repository'
 		])
 	.controller('ExercisesCtrl', ExercisesController)
-	.config(ExercisesConfig)
+	//.config(ExercisesConfig)
 
 	//@ngInject
 	function ExercisesController($q, ExercisesRepository){
@@ -16,14 +16,14 @@
 		});
 	}
 
-	//@ngInject
-	function ExercisesConfig($stateProvider){
-		$stateProvider
-		.state('Exercises', {
-			url: '/exercises',
-			templateUrl: 'app/exercises/index.html',
-			controller: 'ExercisesCtrl',
-			controllerAs: 'esc'
-		});
-	}
+	// //@ngInject
+	// function ExercisesConfig($stateProvider){
+	// 	$stateProvider
+	// 	.state('Exercises', {
+	// 		url: '/exercises',
+	// 		templateUrl: 'app/exercises/index.html',
+	// 		controller: 'ExercisesCtrl',
+	// 		controllerAs: 'esc'
+	// 	});
+	// }
 })();
