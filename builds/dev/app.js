@@ -2,29 +2,19 @@
 	'use strict';
 
 	angular.module('Fitness', [
-		// 'ui.router',
-		'ngRoute',
+		'ui.router',
 		'Fitness.Fire',
-		'Fitness.Exercises'
+		'Fitness.Exercises',
+		'Fitness.Home'
 		])
 	.constant('FIREBASE_URL', 'https://yuliyafitnesstracker.firebaseapp.com')
 	.config(Config)
 	.controller('MainCtrl', MainController)
 
-	// //@ngInject
-	// function Config($urlRouterProvider, $logProvider){
-	// 	$logProvider.debugEnabled(true);
-	// 	$urlRouterProvider.otherwise('/');
-	// }
 	//@ngInject
-	function Config($routeProvider){
-		$routeProvider
-		.when('/exercises', {
-			templateUrl: 'exercises/index.html',
-			controller: 'ExercisesCtrl',
-			controllerAs: 'esc'
-		})
-		.otherwise({redirectTo: '/'})
+	function Config($urlRouterProvider){
+		$urlRouterProvider
+			.otherwise('/home');
 	}
 
 	//@ngInject
@@ -36,30 +26,56 @@
 	'use strict';
 
 	angular.module('Fitness.Exercises', [
-		// 'ui.router',
-		'Fitness.Exercises.Repository'
+		// 'Fitness.Exercises.Repository'
 		])
 	.controller('ExercisesCtrl', ExercisesController)
-	//.config(ExercisesConfig)
+	.config(ExercisesConfig)
 
 	//@ngInject
-	function ExercisesController($q, ExercisesRepository){
-		var exercises = ExercisesRepository.getAllExercises();
-		exercises.$loaded(function(_exercisesList){
-			e.list = _exercisesList;
+	function ExercisesController($q){
+		// var exercises = ExercisesRepository.getAllExercises();
+		// exercises.$loaded(function(_exercisesList){
+		// 	e.list = _exercisesList;
+		// });
+		var s = this;
+		s.hello = "hello, world!";
+	}
+
+	//@ngInject
+	function ExercisesConfig($stateProvider){
+		$stateProvider
+		.state('exercises', {
+			url: '/exercises',
+			templateUrl: 'app/exercises/index.html',
+			controller: 'ExercisesCtrl',
+			controllerAs: 'esc'
 		});
 	}
 
-	// //@ngInject
-	// function ExercisesConfig($stateProvider){
-	// 	$stateProvider
-	// 	.state('Exercises', {
-	// 		url: '/exercises',
-	// 		templateUrl: 'app/exercises/index.html',
-	// 		controller: 'ExercisesCtrl',
-	// 		controllerAs: 'esc'
-	// 	});
-	// }
+
+})();
+;(function(){
+	'use strict';
+
+	angular.module('Fitness.Home', [
+
+		])
+	.controller('HomeCtrl', HomeController)
+	.config(HomeConfig)
+
+	function HomeController(){
+
+	}
+
+	function HomeConfig($stateProvider){
+		$stateProvider
+		.state('home', {
+			url: '/home',
+			templateUrl: 'app/home/index.html',
+			controller: 'ExercisesCtrl',
+			controllerAs: 'hc'
+		});
+	}
 })();
 ;(function(){
 	'use strict';

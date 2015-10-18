@@ -2,29 +2,19 @@
 	'use strict';
 
 	angular.module('Fitness', [
-		// 'ui.router',
-		'ngRoute',
+		'ui.router',
 		'Fitness.Fire',
-		'Fitness.Exercises'
+		'Fitness.Exercises',
+		'Fitness.Home'
 		])
 	.constant('FIREBASE_URL', 'https://yuliyafitnesstracker.firebaseapp.com')
 	.config(Config)
 	.controller('MainCtrl', MainController)
 
-	// //@ngInject
-	// function Config($urlRouterProvider, $logProvider){
-	// 	$logProvider.debugEnabled(true);
-	// 	$urlRouterProvider.otherwise('/');
-	// }
 	//@ngInject
-	function Config($routeProvider){
-		$routeProvider
-		.when('/exercises', {
-			templateUrl: 'exercises/index.html',
-			controller: 'ExercisesCtrl',
-			controllerAs: 'esc'
-		})
-		.otherwise({redirectTo: '/'})
+	function Config($urlRouterProvider){
+		$urlRouterProvider
+			.otherwise('/home');
 	}
 
 	//@ngInject
