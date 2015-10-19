@@ -2,14 +2,14 @@
 	'use strict';
 
 	angular.module('Fitness.Exercises', [
-		// 'Fitness.Exercises.Repository'
+		 'Fitness.Exercises.Repository'
 		])
 	.controller('ExercisesCtrl', ExercisesController)
 	.config(ExercisesConfig)
 
 	//@ngInject
-	function ExercisesController($q){
-		// var exercises = ExercisesRepository.getAllExercises();
+	function ExercisesController($q, ExercisesRepository){
+		 var exercises = ExercisesRepository.getAllExercises();
 		// exercises.$loaded(function(_exercisesList){
 		// 	e.list = _exercisesList;
 		// });
