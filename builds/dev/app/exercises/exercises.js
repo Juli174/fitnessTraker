@@ -8,18 +8,32 @@
 	.config(ExercisesConfig)
 
 	//@ngInject
-	function ExercisesController($q, ExercisesRepository){
+	function ExercisesController($q, ExercisesRepository, $rootScope){
 		var s = this;
 		var exercises = ExercisesRepository.getAllExercises();
 		exercises.$loaded(function(_exercisesList){
 			s.list = _exercisesList;
 		});
 
-		exercises.$watch(function(_exercisesList){
-			s.list = _exercisesList;
-		})
+		// exercises.$watch(function(_exercisesList){
+		// 	s.list = _exercisesList;
+		// });
 
-		s.hello = "hello, world!";
+		s.newExercise = {
+			name: "",
+			target: ""
+		};
+
+		s.addExercise = function(){
+			ExercisesRepository.addNewExercise(s.newExercise)
+				.then(function(ref){
+					$rootScope.addAlert('success', "Упражнение успешно добавлено"); 
+				});
+			s.newExercise = {
+				name: "",
+				target: ""
+			};
+		}
 	}
 
 	//@ngInject

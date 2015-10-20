@@ -10,6 +10,7 @@
 	.constant('FIREBASE_URL', 'https://yuliyafitnesstracker.firebaseio.com/')
 	.config(Config)
 	.controller('MainCtrl', MainController)
+	.run(Run)
 
 	//@ngInject
 	function Config($urlRouterProvider){
@@ -20,6 +21,20 @@
 	//@ngInject
 	function MainController($log, $scope){
 		$scope.hello = 'hello';
+	}
+
+	//@ngInject
+	function Run($rootScope){
+		$rootScope.alerts = [];
+
+		$rootScope.addAlert = function(_type, _msg) {
+			_type = _type || "warning";
+		    $rootScope.alerts.push({type: _type, msg: _msg});
+		  };
+
+		$rootScope.closeAlert = function(index) {
+		    $rootScope.alerts.splice(index, 1);
+		  };
 	}
 })();
 ;(function(){
@@ -32,18 +47,32 @@
 	.config(ExercisesConfig)
 
 	//@ngInject
-	function ExercisesController($q, ExercisesRepository){
+	function ExercisesController($q, ExercisesRepository, $rootScope){
 		var s = this;
 		var exercises = ExercisesRepository.getAllExercises();
 		exercises.$loaded(function(_exercisesList){
 			s.list = _exercisesList;
 		});
 
-		exercises.$watch(function(_exercisesList){
-			s.list = _exercisesList;
-		})
+		// exercises.$watch(function(_exercisesList){
+		// 	s.list = _exercisesList;
+		// });
 
-		s.hello = "hello, world!";
+		s.newExercise = {
+			name: "",
+			target: ""
+		};
+
+		s.addExercise = function(){
+			ExercisesRepository.addNewExercise(s.newExercise)
+				.then(function(ref){
+					$rootScope.addAlert('success', "Упражнение успешно добавлено"); 
+				});
+			s.newExercise = {
+				name: "",
+				target: ""
+			};
+		}
 	}
 
 	//@ngInject
@@ -117,13 +146,14 @@
 		o.getAllExercises = function(){
 			var ref = dbc.getRef();
 
-			return $firebaseArray(ref.child('examples'));
+			return $firebaseArray(ref.child('exercise'));
 
 		}
 
-		o.addNewUser = function(_exercise){
+		o.addNewExercise = function(_exercise){
 			if(_exercise && _exercise.name && _exercise.name.length > 0){
-				var exercisesList = $firebaseArray(ref.child('examples'));
+				var ref = dbc.getRef();
+				var exercisesList = $firebaseArray(ref.child('exercise'));
 				return exercisesList.$add(_exercise);
 			}
 			return false;

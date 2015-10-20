@@ -12,13 +12,14 @@
 		o.getAllExercises = function(){
 			var ref = dbc.getRef();
 
-			return $firebaseArray(ref.child('examples'));
+			return $firebaseArray(ref.child('exercise'));
 
 		}
 
-		o.addNewUser = function(_exercise){
+		o.addNewExercise = function(_exercise){
 			if(_exercise && _exercise.name && _exercise.name.length > 0){
-				var exercisesList = $firebaseArray(ref.child('examples'));
+				var ref = dbc.getRef();
+				var exercisesList = $firebaseArray(ref.child('exercise'));
 				return exercisesList.$add(_exercise);
 			}
 			return false;

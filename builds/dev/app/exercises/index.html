@@ -1,2 +1,22 @@
 <h1>This is Exercise page!!</h1>
 <pre>{{esc.list | json}}</pre>
+<div class="container">
+	<div class="row">
+		<form class="form-inline" name="newExerciseForm" on-submit="esc.addExercise()">
+		  <div class="form-group">
+		    <label class="sr-only" for="newExerciseName">Упражнение</label>
+		    <input 
+			    type="text" 
+			    class="form-control" 
+			    id="newExerciseName" 
+			    placeholder="Упражнение"
+			    ng-model="esc.newExercise.name"
+		    />
+		  </div>
+		  <textarea class="form-control" style="width: 500px" rows="1" ng-model="esc.newExercise.target"></textarea>
+		  <button type="submit" class="btn btn-default">Добавить</button>
+		</form>
+	</div>
+</div>
+<br/>
+<!-- <pre>{{newExerciseForm | json}}</pre> -->
