@@ -7,7 +7,7 @@
 		'Fitness.Exercises',
 		'Fitness.Home'
 		])
-	.constant('FIREBASE_URL', 'https://yuliyafitnesstracker.firebaseapp.com/')
+	.constant('FIREBASE_URL', 'https://yuliyafitnesstracker.firebaseio.com/')
 	.config(Config)
 	.controller('MainCtrl', MainController)
 
@@ -33,11 +33,16 @@
 
 	//@ngInject
 	function ExercisesController($q, ExercisesRepository){
-		 var exercises = ExercisesRepository.getAllExercises();
-		// exercises.$loaded(function(_exercisesList){
-		// 	e.list = _exercisesList;
-		// });
 		var s = this;
+		var exercises = ExercisesRepository.getAllExercises();
+		exercises.$loaded(function(_exercisesList){
+			s.list = _exercisesList;
+		});
+
+		exercises.$watch(function(_exercisesList){
+			s.list = _exercisesList;
+		})
+
 		s.hello = "hello, world!";
 	}
 
@@ -112,8 +117,16 @@
 		o.getAllExercises = function(){
 			var ref = dbc.getRef();
 
-			return $firebaseArray(ref.child('users')).$loaded();
+			return $firebaseArray(ref.child('examples'));
 
+		}
+
+		o.addNewUser = function(_exercise){
+			if(_exercise && _exercise.name && _exercise.name.length > 0){
+				var exercisesList = $firebaseArray(ref.child('examples'));
+				return exercisesList.$add(_exercise);
+			}
+			return false;
 		}
 
 		return o;

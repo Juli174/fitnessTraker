@@ -7,7 +7,7 @@
 		'Fitness.Exercises',
 		'Fitness.Home'
 		])
-	.constant('FIREBASE_URL', 'https://yuliyafitnesstracker.firebaseapp.com/')
+	.constant('FIREBASE_URL', 'https://yuliyafitnesstracker.firebaseio.com/')
 	.config(Config)
 	.controller('MainCtrl', MainController)
 
