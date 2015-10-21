@@ -7,6 +7,7 @@
  </head>
  <body>
  	<ng-include src="'app/status/navbar.html'"></ng-include>
+ 	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
  	<div class="container view-container" ui-view>
  		
  	</div>
