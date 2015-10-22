@@ -1,6 +1,5 @@
 <h1>This is Exercise page!!</h1>
-<pre>{{esc.list | json}}</pre>
-<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+
 <div class="container">
 	<div class="row">
 		<form class="form-inline" name="newExerciseForm" ng-submit="esc.addExercise()">
@@ -21,3 +20,22 @@
 </div>
 <br/>
 <!-- <pre>{{newExerciseForm | json}}</pre> -->
+<!-- <pre>{{esc.list | json}}</pre> -->
+<table class="table">
+	<thead>
+		<tr>
+			<th>№</th>
+			<th>Название</th>
+			<th>Определение</th>
+			<th>Управление</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="exercise in esc.list">
+			<td ng-bind="$index+1"></td>
+			<td ng-bind="exercise.name"></td>
+			<td ng-bind="exercise.target"></td>
+			<td><span class="pointer glyphicon glyphicon-remove" aria-hidden="true" ng-click="exercise.removeExercise(exercise.$id)"></span></td>
+		</tr>
+	</tbody>
+</table>

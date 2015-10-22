@@ -34,6 +34,15 @@
 				target: ""
 			};
 		}
+
+		s.removeExercise = function(_$id){
+			ExercisesRepository
+				.removeExercise(_$id)
+				.then(function(){
+					console.log(arguments);
+					$rootScope.addAlert('Пользователь успешно удален', 'success');
+				});
+		}
 	}
 
 	//@ngInject
