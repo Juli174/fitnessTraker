@@ -8,7 +8,7 @@
 	.config(ExercisesConfig)
 
 	//@ngInject
-	function ExercisesController($q, ExercisesRepository, $rootScope){
+	function ExercisesController($q, ExercisesRepository, $rootScope, $scope){
 		var s = this;
 		var exercises = ExercisesRepository.getAllExercises();
 		exercises.$loaded(function(_exercisesList){
@@ -40,9 +40,12 @@
 				.removeExercise(_$id)
 				.then(function(){
 					console.log(arguments);
-					$rootScope.addAlert('Пользователь успешно удален', 'success');
+					$rootScope.addAlert('success', 'Пользователь успешно удален');
 				});
 		}
+
+		//pagination
+		s.currentPage = 1;
 	}
 
 	//@ngInject

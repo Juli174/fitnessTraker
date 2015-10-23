@@ -47,7 +47,7 @@
 	.config(ExercisesConfig)
 
 	//@ngInject
-	function ExercisesController($q, ExercisesRepository, $rootScope){
+	function ExercisesController($q, ExercisesRepository, $rootScope, $scope){
 		var s = this;
 		var exercises = ExercisesRepository.getAllExercises();
 		exercises.$loaded(function(_exercisesList){
@@ -79,9 +79,12 @@
 				.removeExercise(_$id)
 				.then(function(){
 					console.log(arguments);
-					$rootScope.addAlert('Пользователь успешно удален', 'success');
+					$rootScope.addAlert('success', 'Пользователь успешно удален');
 				});
 		}
+
+		//pagination
+		s.currentPage = 1;
 	}
 
 	//@ngInject
@@ -155,14 +158,14 @@
 		o.getAllExercises = function(){
 			var ref = dbc.getRef();
 
-			return $firebaseArray(ref.child('exercise'));
+			return $firebaseArray(ref.child('exercises'));
 
 		}
 
 		o.addNewExercise = function(_exercise){
 			if(_exercise && _exercise.name && _exercise.name.length > 0){
 				var ref = dbc.getRef();
-				var exercisesList = $firebaseArray(ref.child('exercise'));
+				var exercisesList = $firebaseArray(ref.child('exercises'));
 				return exercisesList.$add(_exercise);
 			}
 			return false;
@@ -173,7 +176,7 @@
 				var ref = dbc.getRef();
 				//var exercisesList = $firebaseArray(ref.child('exercise'));
 				//return exercisesList.$remove(_$id);
-				var exercisesList = $firebaseObject(ref.child('exercise').child(_$id));
+				var exercisesList = $firebaseObject(ref.child('exercises').child(_$id));
 				return exercisesList.$remove();
 			}
 		}

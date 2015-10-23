@@ -21,12 +21,13 @@
 <br/>
 <!-- <pre>{{newExerciseForm | json}}</pre> -->
 <!-- <pre>{{esc.list | json}}</pre> -->
+<pagination total-items="esc.list.length" ng-model="esc.currentPage" ng-change="esc.pageChanged()"></pagination>
 <table class="table">
 	<thead>
 		<tr>
 			<th>№</th>
 			<th>Название</th>
-			<th>Определение</th>
+			<th>Уровень подготовки</th>
 			<th>Управление</th>
 		</tr>
 	</thead>
@@ -34,8 +35,8 @@
 		<tr ng-repeat="exercise in esc.list">
 			<td ng-bind="$index+1"></td>
 			<td ng-bind="exercise.name"></td>
-			<td ng-bind="exercise.target"></td>
-			<td><span class="pointer glyphicon glyphicon-remove" aria-hidden="true" ng-click="exercise.removeExercise(exercise.$id)"></span></td>
+			<td ng-bind="exercise.difficulty_level"></td>
+			<td><span class="pointer glyphicon glyphicon-remove" aria-hidden="true" ng-click="esc.removeExercise(exercise.$id)"></span></td>
 		</tr>
 	</tbody>
 </table>
