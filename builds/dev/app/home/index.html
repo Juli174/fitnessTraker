@@ -1,1 +1,55 @@
-<div>Home</div>
+
+<div class="container">
+	<div class="row" ng-if="!isUserLogged">
+		<h1>Войдите в Вашу учетную запись</h1>
+	</div>
+	<div class="row" ng-show="hc.userLogin">
+		<div class="alert" role="alert"
+		ng-class="{'alert-success': !hc.error, 'alert-danger': hc.error}">
+			{{hc.userLogin}}
+		</div>
+	</div>
+	<div class="row" ng-if="!isUserLogged">
+		<form class="form-inline" ng-submit="hc.loginUser(hc.user)">
+		  <div class="form-group">
+		    <label class="sr-only" for="email">Email address</label>
+		    <input type="email" class="form-control" id="email" placeholder="Email" ng-model="hc.user.email">
+		  </div>
+		  <div class="form-group">
+		    <label class="sr-only" for="password">Password</label>
+		    <input type="password" class="form-control" id="password" placeholder="Password" ng-model="hc.user.password">
+		  </div>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox"> Remember me
+		    </label>
+		  </div>
+		  <button type="submit" class="btn btn-default">Sign in</button>
+		</form>
+	</div>
+</div>
+
+
+<div lass="container">
+	<div class="row" ng-if="!isUserLogged">
+		<h1>Зарегистрируйтесь, если Вы новый пользователь</h1>
+	</div>
+	<div class="row" ng-if="!isUserLogged">
+		<form ng-submit="hc.addUser(hc.createUser)">
+		  <div class="form-group">
+		    <label for="email">Email address</label>
+		    <input type="email" class="form-control" id="email" placeholder="Email" ng-model="hc.createUser.email">
+		  </div>
+		  <div class="form-group">
+		    <label for="password">Password</label>
+		    <input type="password" class="form-control" id="password" placeholder="Password" ng-model="hc.createUser.password">
+		  </div>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox"> Check me out
+		    </label>
+		  </div>
+		  <button type="submit" class="btn btn-default">Sign up</button>
+		</form>
+	</div>
+</div>

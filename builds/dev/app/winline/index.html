@@ -1,0 +1,35 @@
+<div>
+	<div>
+		<!-- заголовки -->
+		<div>
+			<div>Открыть счет</div>
+			<input type="button" value="назад"/>
+		</div>
+		<!-- картинка -->
+		<div></div>
+	</div>
+	<!-- Основная форма -->
+	<div>
+		<!-- формы для заполнения -->
+		<div>
+			<!-- шаги -->
+			<div>
+				<div ng-class="{orange: step.number == 0}">1 шаг</div>
+				<div ng-class="{orange: step.number == 1}">2 шаг</div>
+				<div ng-class="{orange: step.number == 2}">3 шаг</div>
+			</div>
+			<!-- сами формочки -->
+			<ng-include src="step.url"></ng-include>
+			<!-- кнопки перехода -->
+			<div>
+				<input type="button" value="Назад" ng-click="previousStep()" ng-if="step.number!=0"/>
+				<input type="button" value="Далее" ng-click="nextStep()" ng-if="step.number!=2"/>
+			</div>
+		</div>
+		<!-- какой-то текст -->
+		<div>
+			<ng-include src="comment.url"></ng-include>
+		</div>
+	</div>
+
+</div>

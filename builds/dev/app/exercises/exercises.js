@@ -2,7 +2,8 @@
 	'use strict';
 
 	angular.module('Fitness.Exercises', [
-		 'Fitness.Exercises.Repository'
+		 'Fitness.Exercises.Repository',
+		 'ui.bootstrap'
 		])
 	.controller('ExercisesCtrl', ExercisesController)
 	.config(ExercisesConfig)

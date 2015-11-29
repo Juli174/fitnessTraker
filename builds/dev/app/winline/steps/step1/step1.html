@@ -1,0 +1,32 @@
+<!-- шаг 1 -->
+<div ng-controller="OpenAccountStepOneController">
+	<h2>Личная информация</h2>
+	<div>
+		<div>Фамилия</div>
+		<input ng-model="surname"/>
+	</div>
+	<div>
+		<div>Имя</div>
+		<input type="text" ng-model="name"/>
+	</div>
+	<div>
+		<div>Дата рождения</div>
+		<div>
+			<select ng-model="day" ng-options="day for day in days"></select>
+			<select ng-model="month" ng-options="month for month in months"></select>
+			<select ng-model="year" ng-options="year for year in years"></select>
+		</div>
+	</div>
+	<div>
+		<div>Страна проживания</div>
+		<div>
+			<select ng-model="myCountry" ng-options="country for country in countries">
+				<option value="">Не выбрана</option>
+			</select>
+		</div>
+	</div>
+	<div>
+		<div>Мобильный телефон</div>
+		<input type="text" ng-model="phone"/>
+	</div>
+</div>

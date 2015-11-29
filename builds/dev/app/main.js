@@ -5,7 +5,10 @@
 		'ui.router',
 		'Fitness.Fire',
 		'Fitness.Exercises',
-		'Fitness.Home'
+		'Fitness.Auth',
+		'Fitness.Navbar',
+		'Fitness.Home',
+		'winline.openAccount'
 		])
 	.constant('FIREBASE_URL', 'https://yuliyafitnesstracker.firebaseio.com/')
 	.config(Config)
