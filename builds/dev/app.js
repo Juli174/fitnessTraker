@@ -272,6 +272,23 @@
 
 		};
 
+		$scope.comment = true;
+		//обратный отсчет
+		$scope.press = function(){
+			$scope.comment = false;
+			var count = 10;
+			$scope.count = count;
+			var seconds = setInterval(function(){
+				count--;
+				document.getElementById("count").innerText = count;
+				console.log(count);
+				if(count == 0)
+				clearInterval(seconds);
+			}, 1000);
+
+
+		}
+
 		//перейти к следующему шагу
 		$scope.nextStep = function(){
 			var current = $scope.step.number;
